@@ -1,0 +1,40 @@
+.skill {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin: 2px 0;
+
+  .color {
+    color: white;
+  }
+
+  .levels {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .level {
+      width: 8px;
+      height: 8px;
+      background: #a6a6a6;
+      margin: 0 1px;
+      border-radius: 4px;
+
+      &.secondary {
+        background: white;
+
+        &.has-color {
+          background: #56b6d6;
+        }
+      }
+
+      &.has-color {
+        background: #40879b;
+      }
+    }
+
+  }
+}

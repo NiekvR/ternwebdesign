@@ -1,73 +1,52 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from './layout.module.scss'
-import utilStyles from '../styles/utils.module.scss'
-import Link from 'next/link'
+import React from 'react';
+import Image from 'next/image';
+import { Frameworks } from '../models/project';
+import FrameworkComponent from './frameworks';
+import { getTitleId } from '../lib/projects.service';
+import Link from 'next/link';
 
-const name = 'Your Name'
-export const siteTitle = 'Next.js Sample Website'
+class Layout extends React.Component<{ children, home: boolean, frameworks?: Frameworks, open?: boolean, openExtraContent?: () => void }, { }> {
+    constructor(props) {
+        super(props);
+    }
 
-export default function Layout({ children, home = false }) {
-    return (
-        <div className={styles.container}>
-            <Head>
-                <link rel="icon" href="/favicon.ico" />
-                <meta
-                    name="description"
-                    content="Learn how to build a personal website using Next.js"
-                />
-                <meta
-                    property="og:image"
-                    content={`https://og-image.vercel.app/${encodeURI(
-                        siteTitle
-                    )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-                />
-                <meta name="og:title" content={siteTitle} />
-                <meta name="twitter:card" content="summary_large_image" />
-            </Head>
-            <header className={styles.header}>
-                {home ? (
-                    <>
+    render() {
+        return (
+            <div className={`container ${this.props.open ? "open" : ""}`}>
+                <div className={`item list logo md ${ this.props.home ? '' : 'detail'}`}>
+                    <div className="logo-container">
+                        { !!this.props.open ? (
+                            <button onClick={() => this.props.openExtraContent()}><span>Over...</span></button>
+                        ) : ( null )}
                         <Image
                             priority
-                            src="/images/profile.jpeg"
-                            className={utilStyles.borderCircle}
-                            height={144}
-                            width={144}
-                            alt={name}
+                            src="/images/ternwebdesign.png"
+                            alt="logo ternwebdesign"
+                            width={290}
+                            height={90}
                         />
-                        <h1 className={utilStyles.heading2Xl}>{name}</h1>
-                    </>
-                ) : (
-                    <>
-                        <Link href="/">
-                            <a>
-                                <Image
-                                    priority
-                                    src="/images/profile.jpeg"
-                                    className={utilStyles.borderCircle}
-                                    height={108}
-                                    width={108}
-                                    alt={name}
-                                />
-                            </a>
-                        </Link>
-                        <h2 className={utilStyles.headingLg}>
+                        { !this.props.home ? (
                             <Link href="/">
-                                <a className={utilStyles.colorInherit}>{name}</a>
+                                <button><span>Alle projecten</span></button>
                             </Link>
-                        </h2>
-                    </>
-                )}
-            </header>
-            <main>{children}</main>
-            {!home && (
-                <div className={styles.backToHome}>
-                    <Link href="/">
-                        <a>← Back to home</a>
-                    </Link>
+                        ) : ( null )}
+                        <div className="scroll">
+                            Scroll naar beneden
+                            <i className="fas fa-angle-double-down"></i>
+                        </div>
+                    </div>
+                    { !!this.props.frameworks ? (
+                            <div className="frameworks">
+                                <h2>Gebruikte technieken</h2>
+                                <FrameworkComponent frameworks={this.props.frameworks} extended={!!this.props.frameworks} />
+                            </div>
+                        ): null
+                    }
                 </div>
-            )}
-        </div>
-    )
+                {this.props.children}
+            </div>
+        )
+    }
 }
+
+export default Layout;

@@ -1,49 +1,59 @@
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.scss'
+import { getCV, getProjects } from '../lib/projects.service';
+import React from 'react';
+import { Project } from '../models/project';
+import CurriculumVitaeComponent from '../components/curriculum-vitae-component';
+import ProjectDetails from '../components/project-details';
+import Image from 'next/image';
+import { CurriculumVitae } from '../models/curriculum-vitae';
+import Layout from '../components/layout';
 import Head from 'next/head';
-import Date from '../components/date'
-import Link from 'next/link'
 
-import { getSortedPostsData } from '../lib/posts'
 
-export async function getStaticProps() {
-    const allPostsData = getSortedPostsData()
+export function getStaticProps() {
+    const projects = getProjects();
+    const cv = getCV();
     return {
         props: {
-            allPostsData
+            projects,
+            cv
         }
     }
 }
 
-export default function Home({ allPostsData }) {
-    return (
-        <Layout home>
-            <Head>
-                <title>{siteTitle}</title>
-            </Head>
-            <section className={utilStyles.headingMd}>
-                <p>[Your Self Introduction]</p>
-                <p>
-                    (This is a sample website - you’ll be building a site like this on{' '}
-                    <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-                </p>
-            </section>
-            <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-                <h2 className={utilStyles.headingLg}>Blog</h2>
-                <ul className={utilStyles.list}>
-                    {allPostsData.map(({id, date, title}) => (
-                        <li className={utilStyles.listItem} key={id}>
-                            <Link href={`/posts/${id}`}>
-                                <a>{title}</a>
-                            </Link>
-                            <br />
-                            <small className={utilStyles.lightText}>
-                                <Date dateString={date} />
-                            </small>
-                        </li>
+class Home extends React.Component<{ projects: Project[], cv: CurriculumVitae }, { extraContentOpen: boolean }> {
+    constructor(props) {
+        super(props);
+        this.state = {extraContentOpen: false};
+    }
+
+    openExtraContent() {
+        this.setState({ extraContentOpen: true });
+    }
+
+    closeExtraContent() {
+        this.setState({ extraContentOpen: false })
+    }
+
+    render() {
+        return (
+            <>
+                <Head>
+                    <title>Tern Webdesign</title>
+                    <meta property="og:title" content="Tern Webdesign" key="title" />
+                    <meta property="og:description" content="TernWebdesign, voor het bedenken, ontwerpen en maken
+                    van webapplicaties." key="description" />
+                </Head>
+                <div className="side-bar left"></div>
+                <Layout home={true} open={this.state.extraContentOpen} openExtraContent={() => this.openExtraContent()}>
+                    {this.props.projects.map((project: Project) => (
+                        <ProjectDetails key={project.title} project={project}/>
                     ))}
-                </ul>
-            </section>
-        </Layout>
-    )
+                </Layout>
+                <CurriculumVitaeComponent cv={this.props.cv} open={this.state.extraContentOpen} close={() => this.closeExtraContent()}/>
+                <div className="side-bar right"></div>
+            </>
+        )
+    }
 }
+
+export default Home;
