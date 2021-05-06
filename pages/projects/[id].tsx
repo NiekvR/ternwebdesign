@@ -3,7 +3,7 @@ import Layout from '../../components/layout';
 import { Project } from '../../models/project';
 import React from 'react';
 import Image from 'next/image';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import Head from 'next/head';
 
 export async function getStaticPaths() {

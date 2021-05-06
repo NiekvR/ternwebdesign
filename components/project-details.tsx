@@ -1,4 +1,4 @@
-import classNames from 'classNames';
+import classNames from 'classnames';
 import Image from 'next/image';
 import Framework from './frameworks';
 import Link from 'next/link';

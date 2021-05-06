@@ -27,7 +27,7 @@ export function getProjectData(id) {
 }
 
 export function getTitleId(title) {
-    return title.replace(/\s/, '').toLowerCase();
+    return title.replace(/\s/g, '').toLowerCase();
 }
 
 export function getCVEducation(): Experience[] {
