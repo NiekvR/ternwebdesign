@@ -1,24 +1,24 @@
-import cn from 'classNames';
+import classNames from 'classNames';
 import Image from 'next/image';
 import Framework from './frameworks';
 import Link from 'next/link';
 import { getTitleId } from '../lib/projects.service';
 
 export default function ProjectDetails({project}) {
-    const projectClass = cn({
+    const projectClass = classNames({
         'item': true,
         'list': true,
         'sm': project.size === 'sm',
         'md': project.size === 'md',
         'lg': project.size === 'lg'
     });
-    const tagClass = cn({
+    const tagClass = classNames({
        'tag': true,
        'blue': project.color === '#55B6D7',
        'green': project.color === '#BED63A',
        'dark-green': project.color === '#76B542',
     });
-    const contentClass = cn({
+    const contentClass = classNames({
        'content': true,
        'blue': project.color === '#55B6D7',
        'green': project.color === '#BED63A',

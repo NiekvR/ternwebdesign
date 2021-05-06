@@ -1,5 +1,4 @@
 import React from 'react';
-import { Framework } from '../models/curriculum-vitae';
 import { Frameworks } from '../models/project';
 
 function FireBaseIcon () {

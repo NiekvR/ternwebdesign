@@ -3,7 +3,7 @@ import Layout from '../../components/layout';
 import { Project } from '../../models/project';
 import React from 'react';
 import Image from 'next/image';
-import cn from 'classNames';
+import classNames from 'classNames';
 import Head from 'next/head';
 
 export async function getStaticPaths() {
@@ -28,7 +28,7 @@ class ProjectDetail extends React.Component<{ projectData: Project }, { aClass: 
         super(props);
 
         this.state = {
-            aClass: cn({
+            aClass: classNames({
                 'blue': this.props.projectData.color === '#55B6D7',
                 'green': this.props.projectData.color === '#BED63A',
                 'dark-green': this.props.projectData.color === '#76B542',

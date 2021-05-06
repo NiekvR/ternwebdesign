@@ -1,4 +1,4 @@
-import cn from 'classNames';
+import classNames from 'classNames';
 import React from 'react';
 import Profile from './profile';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ class CurriculumVitaeComponent extends React.Component<{ cv: CurriculumVitae, op
         this.state = { selectedTab: 'ABOUT' }
     }
 
-    public extraContentClass = cn({
+    public extraContentClass = classNames({
         'extra-content': true,
         'open': this.props.open
     });

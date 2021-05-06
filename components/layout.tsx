@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import { Frameworks } from '../models/project';
 import FrameworkComponent from './frameworks';
-import { getTitleId } from '../lib/projects.service';
 import Link from 'next/link';
 
 class Layout extends React.Component<{ children, home: boolean, frameworks?: Frameworks, open?: boolean, openExtraContent?: () => void }, { }> {

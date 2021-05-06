@@ -3,7 +3,6 @@ import React from 'react';
 import { Project } from '../models/project';
 import CurriculumVitaeComponent from '../components/curriculum-vitae-component';
 import ProjectDetails from '../components/project-details';
-import Image from 'next/image';
 import { CurriculumVitae } from '../models/curriculum-vitae';
 import Layout from '../components/layout';
 import Head from 'next/head';
