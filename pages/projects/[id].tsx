@@ -41,6 +41,7 @@ class ProjectDetail extends React.Component<{ projectData: Project }, { aClass: 
             <>
                 <Head>
                     <title>Tern Webdesign - {this.props.projectData.title}</title>
+                    <meta property="description" content={this.props.projectData.excerpt}/>
                     <meta property="og:title" content={`Tern Webdesign - ${this.props.projectData.title}`} key="title" />
                     <meta property="og:description" content={this.props.projectData.excerpt} key="description" />
                 </Head>

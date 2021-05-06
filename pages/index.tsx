@@ -38,6 +38,8 @@ class Home extends React.Component<{ projects: Project[], cv: CurriculumVitae },
             <>
                 <Head>
                     <title>Tern Webdesign</title>
+                    <meta name="description" content="TernWebdesign, voor het bedenken, ontwerpen en maken
+                    van webapplicaties." />
                     <meta property="og:title" content="Tern Webdesign" key="title" />
                     <meta property="og:description" content="TernWebdesign, voor het bedenken, ontwerpen en maken
                     van webapplicaties." key="description" />
